@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Todo;
 use App\Http\Resources\TodoResource;
@@ -17,12 +17,9 @@ class TodoControllerAPI extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Todo::class);
-
         $todo = Todo::all();
 
         return new TodoCollection($todo);
-
     }
 
     /**
@@ -33,12 +30,9 @@ class TodoControllerAPI extends Controller
      */
     public function store(TodoRequest $request)
     {
-        $this->authorize('create', Todo::class);
-
         $todo = Todo::create($request->validated());
 
         return new TodoResource($todo);
-
     }
 
     /**
@@ -49,10 +43,7 @@ class TodoControllerAPI extends Controller
      */
     public function show(Todo $todo)
     {
-        $this->authorize('view', $todo);
-
         return new TodoResource($todo);
-
     }
 
     /**
@@ -64,12 +55,9 @@ class TodoControllerAPI extends Controller
      */
     public function update(TodoRequest $request, Todo $todo)
     {
-        $this->authorize('update', $todo);
-
         $todo->update($request->validated());
 
         return new TodoResource($todo);
-
     }
 
     /**
@@ -80,11 +68,6 @@ class TodoControllerAPI extends Controller
      */
     public function destroy(Todo $todo)
     {
-        $this->authorize('delete', $todo);
-
         $todo->delete();
-
-        return new TodoResource($todo);
-
     }
 }

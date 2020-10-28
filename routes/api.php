@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TodoControllerAPI;
+use App\Http\Controllers\API\TodoControllerAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
